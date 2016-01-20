@@ -7,7 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "YunisTabbarController.h"
+#import "YunisTabbarItem.h"
 
+#import "HomeViewController.h"
+#import "TopicViewController.h"
+#import "UserViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self setupViewControllers];
+    [self.window setRootViewController:self.viewController];
     return YES;
 }
 
@@ -42,4 +49,73 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (void)setupViewControllers {
+    HomeViewController *firstViewController = [[HomeViewController alloc] init];
+    firstViewController.title = @"首页";
+    UIViewController *firstNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:firstViewController];
+    
+    TopicViewController *secondViewController = [[TopicViewController alloc] init];
+    secondViewController.title = @"话题";
+    UIViewController *secondNavigationController = [[UINavigationController alloc]
+                                                    initWithRootViewController:secondViewController];
+    
+    UserViewController *thirdViewController = [[UserViewController alloc] init];
+    thirdViewController.title = @"我";
+    UIViewController *thirdNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:thirdViewController];
+//
+//    CYFenZhongViewCtr *thirdViewController1 = [[CYFenZhongViewCtr alloc] init];
+//    thirdViewController1.title = @"分众";
+//    UIViewController *thirdNavigationController1 = [[UINavigationController alloc]
+//                                                    initWithRootViewController:thirdViewController1];
+//    
+//    
+//    CYCenterViewCtr *thirdViewController2 = [[CYCenterViewCtr alloc] init];
+//    thirdViewController2.title = @"个人中心";
+//    UIViewController *thirdNavigationController2 = [[UINavigationController alloc]
+//                                                    initWithRootViewController:thirdViewController2];
+//    
+    YunisTabbarController *tabBarController = [[YunisTabbarController alloc] init];
+    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController,
+                                           thirdNavigationController]];
+    self.viewController = tabBarController;
+    
+    [self customizeTabBarForController:tabBarController];
+}
+- (void)customizeTabBarForController:(YunisTabbarController *)tabBarController {
+    NSArray *arr = [NSArray arrayWithObjects:
+                    @{@"oneimage": [UIImage imageNamed:@"CY_Libary"],
+                      @"twoimage": [UIImage imageNamed:@"CY_Libary1"],
+                      },
+                    @{@"oneimage": [UIImage imageNamed:@"CY_contacts"],
+                      @"twoimage": [UIImage imageNamed:@"CY_contacts1"],
+                      },
+       
+                    @{@"oneimage": [UIImage imageNamed:@"CY_Fenzhong"],
+                      @"twoimage": [UIImage imageNamed:@"CY_Fenzhong1"],
+                      },
+                    @{@"oneimage": [UIImage imageNamed:@"CY_CenterIcon"],
+                      @"twoimage": [UIImage imageNamed:@"CY_CenterIcon1"],
+                      },
+                    @{@"oneimage": [UIImage imageNamed:@"CY_Diy"],
+                      @"twoimage": [UIImage imageNamed:@"CY_Diy1"],
+                      },
+                    nil];
+    
+    NSArray *titleArr = @[@"首页",@"话题",@"我",@"个人中心"];
+    [[[tabBarController tabBar] items] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        YunisTabbarItem *item = obj;
+        item.title = titleArr[idx];
+        
+        UIImage *selectedimage = [arr[idx] objectForKey:@"twoimage"];
+        UIImage *unselectedimage = [arr[idx] objectForKey:@"oneimage"];
+        item.backgroundSelectedImage = selectedimage;
+        item.backgroundUnselectedImage = unselectedimage;
+        if (idx == 0) {
+            item.Selected = YES;
+        }
+    }];
+}
 @end

@@ -1,0 +1,180 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+
+
+//define this constant if you want to use Masonry without the 'mas_' prefix
+//    #define MAS_SHORTHAND
+
+//define this constant if you want to enable auto-boxing for default syntax
+#define MAS_SHORTHAND_GLOBALS
+
+#import "Masonry.h"
+
+
+#endif
+
+
+#define KPackagename @"w-ios-440x480"
+
+//target里的build "1"
+//#define KPackageversion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
+
+//target里的version "1.0"
+#define KPackageversion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
+#define KApiversion @"6"
+
+
+
+
+#define Share_Content @"彰显个性的小时代，彩印让你的来去电屏幕个性起来! 摆脱素颜，马上下载，马上不同! http://dm.10086.cn/cy"
+
+#define CYWelComeImageInfo @"CYWelComeImageInfo"
+
+// 李满 "开始分享"的通知
+#define Notification_Share_Begin @"开始分享"
+
+// 修改头像时, 保存到沙盒中的文件名称(带后缀名)
+#define Sandbox_Avater @"avater.png"
+
+// 常见问题URL地址
+#define FAQ_URL @"http://dm.10086.cn/cy/cspage.html?tf=strategy/ios"
+
+// 接口的网址前缀
+#define httpUrl @"http://218.207.208.46/shanshow_web"
+
+// 通讯超时时间
+#define TIME_DELAY 10
+
+// 延迟0.35秒判断是否登录成功
+#define Login_Time_Delay 1
+
+#define Notification_SetFenZhongTaskSuc @"设置分众彩任务印成功"
+
+// "退出登录"通知
+#define Notification_Logout @"退出登录"
+
+// "已订购套餐包"通知
+#define Notification_Ordered @"已订购套餐包"
+
+// "开通彩印"成功的通知
+#define Notification_OpenCaiyinSuccess @"开通彩印成功"
+
+// "退订彩印"成功的通知
+#define Notification_CloseCaiyinSuccess @"退订彩印成功"
+
+// "修改头像"成功的通知
+#define Notification_AvaterSuccess @"修改头像成功"
+
+// 通知:登录时判断已经开通了彩印
+#define Notification_登录时判断已经开通了彩印 @"登录时判断已经开通了彩印"
+
+// 通知:筛选tableView弹出后的Tap点击
+#define Notification_筛选tableView弹出后的Tap点击 @"筛选tableView弹出后的Tap点击"
+
+// 收藏成功的通知
+#define Notification_FavorSuccess @"收藏成功"
+
+// 增加鲜花成功 - 首页
+#define Notification_AddFlowerSuccess_Home @"增加鲜花成功_Home"
+
+// 增加鲜花成功 - 个人中心
+#define Notification_AddFlowerSuccess_Center @"增加鲜花成功_Center"
+
+// 增加鲜花成功 - 设置
+#define Notification_AddFlowerSuccess_Setting @"增加鲜花成功_Setting"
+
+// DIY成功的通知
+#define Notification_DIYSuccess @"DIY成功"
+
+
+// 通过plist文件的key-value, 解决按钮的BUG
+#define Plist_Key_套餐包是否已订购 @"我的套餐包是否已订购"
+
+// 通知:筛选视图cell点击
+#define Notification_FilterCellClicked @"筛选视图cell点击"
+
+// 网络恢复的通知
+#define Notification_NetworkBack @"网络恢复"
+
+// 提醒用户升级的时间
+#define REMIND_UPDATE_TIME @"RemindTime"
+
+// 是否是强制更新
+#define IS_FORCE_UPDATE @"NO"
+
+
+
+/***********************颜色*************************************/
+//颜色读取
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r,g,b) RGBA(r,g,b,1.0f)
+
+//页面背景色
+#define KViewBGColor [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1]
+
+#define kTextRedColor [UIColor colorWithRed:220/255.0 green:83/255.0 blue:89/255.0 alpha:1]
+
+#define kTextGrayColor [UIColor colorWithRed:97/255.0 green:97/255.0 blue:97/255.0 alpha:1]
+
+//紫色
+#define KPurpleColor RGB(126,0,112)
+
+//灰色背景
+//#define KGrayColor RGB(220,220,220)
+#define KGrayColor [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1]
+
+
+/******************字体******************************************/
+#define KSysFont25 [UIFont systemFontOfSize:25]
+#define KSysFont20 [UIFont systemFontOfSize:20]
+
+#define KSysFont18 [UIFont systemFontOfSize:18]
+
+#define KSysFont16 [UIFont systemFontOfSize:16]
+
+#define KSysFont15 [UIFont systemFontOfSize:15]
+
+#define KSysFont13 [UIFont systemFontOfSize:13]
+
+#define KSysFont12 [UIFont systemFontOfSize:12]
+
+#define KSysFont10 [UIFont systemFontOfSize:10]
+
+/**********************屏幕宽高**************************************/
+//屏幕宽高
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+/************************************************************/
+#define USER_DEFAULT [NSUserDefaults standardUserDefaults]
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+// 注释下行则不打印日志
+#define __SHOW__DEBUGLog__
+
+#ifdef __SHOW__DEBUGLog__
+#define DEBUGLog( s, ... ) NSLog( @"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DEBUGLog( s, ... ) {}
+#endif
+
+
+
