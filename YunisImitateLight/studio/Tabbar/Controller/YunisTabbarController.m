@@ -78,7 +78,7 @@ static float KTabbarHeigth = 50;
         
         if (!hidden) {
             tabBarStartingY = viewSize.height - tabBarHeight;
-            contentViewHeight -= tabBarHeight;
+//            contentViewHeight -= tabBarHeight;
             [[weakSelf tabBar] setHidden:NO];
         }
         
@@ -104,25 +104,18 @@ static float KTabbarHeigth = 50;
     if (selectedIndex >= self.viewControllers.count) {
         return;
     }
-    if (selectedIndex == 2) {
-        
-        DEBUGLog(@"2222222222222222");
-    }else
-    {
-        if ([self selectedViewController]) {
-            [[self selectedViewController] willMoveToParentViewController:nil];
-            [[[self selectedViewController] view] removeFromSuperview];
-            [[self selectedViewController] removeFromParentViewController];
-        }
-        _selectedIndex = selectedIndex;
-        [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
-        [self addChildViewController:[self selectedViewController]];
-        [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
-        [[self contentView] addSubview:[[self selectedViewController] view]];
-        [[self selectedViewController] didMoveToParentViewController:self];
-        [self setNeedsStatusBarAppearanceUpdate];
-
+    if ([self selectedViewController]) {
+        [[self selectedViewController] willMoveToParentViewController:nil];
+        [[[self selectedViewController] view] removeFromSuperview];
+        [[self selectedViewController] removeFromParentViewController];
     }
+    _selectedIndex = selectedIndex;
+    [self setSelectedViewController:[[self viewControllers] objectAtIndex:selectedIndex]];
+    [self addChildViewController:[self selectedViewController]];
+    [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
+    [[self contentView] addSubview:[[self selectedViewController] view]];
+    [[self selectedViewController] didMoveToParentViewController:self];
+    [self setNeedsStatusBarAppearanceUpdate];
     
 
 }
@@ -170,7 +163,7 @@ static float KTabbarHeigth = 50;
         _tabBar = [[YunisTabbar alloc]initWithBlock:^(NSInteger index) {
             self.selectedIndex = index;
         }];
-        _tabBar.backgroundColor = [UIColor whiteColor];
+        _tabBar.backgroundColor = [UIColor colorWithWhite:.9 alpha:.9];
         [_tabBar setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|
                                       UIViewAutoresizingFlexibleTopMargin|
                                       UIViewAutoresizingFlexibleLeftMargin|

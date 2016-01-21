@@ -24,6 +24,12 @@
     // Override point for customization after application launch.
     [self setupViewControllers];
     [self.window setRootViewController:self.viewController];
+    
+    
+//    UITabBarController *T = [[UITabBarController alloc] init];
+//    T.viewControllers = @[[[HomeViewController alloc] init],[[TopicViewController alloc] init],[[UserViewController alloc] init]];
+//    self.window.rootViewController = T;
+//    T.tabBar.backgroundColor = [UIColor clearColor];
     return YES;
 }
 
