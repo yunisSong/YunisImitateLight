@@ -78,7 +78,7 @@ static float KTabbarHeigth = 50;
         
         if (!hidden) {
             tabBarStartingY = viewSize.height - tabBarHeight;
-//            contentViewHeight -= tabBarHeight;
+            contentViewHeight -= tabBarHeight;
             [[weakSelf tabBar] setHidden:NO];
         }
         

@@ -11,7 +11,6 @@
 @implementation HomeDefultCell
 - (void)handelSource:(HomeItemModel *)model
 {
-    self.topLabel.text = @"TOP1";
     self.TitleLabel.text = model.title;
     self.desLabel.text = model.digest;
     
@@ -19,14 +18,22 @@
     
     
 }
+- (void)showTopIndex:(NSInteger)topIndex
+{
+    self.topLabel.text = [NSString stringWithFormat:@"TOP %ld",(long)topIndex];
+
+}
 - (void)awakeFromNib {
     // Initialization code
     self.contentView.backgroundColor = KViewBGColor;
+//    self.titleImageViewConstraints.constant = 200;
 }
-
+- (void)hiddenImageView
+{
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 - (void)layoutSubviews

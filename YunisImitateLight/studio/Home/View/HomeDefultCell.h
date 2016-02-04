@@ -18,8 +18,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleImageViewConstraints;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *LabtopConstraints;
 
 @property (weak, nonatomic) IBOutlet ShareView *shareView;
 
 - (void)handelSource:(HomeItemModel *)model;
+- (void)hiddenImageView;
+- (void)showTopIndex:(NSInteger)topIndex;
 @end

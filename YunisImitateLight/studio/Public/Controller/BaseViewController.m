@@ -14,24 +14,49 @@
 
 @implementation BaseViewController
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //加载页面
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.barTintColor = RGB(125, 0, 112);
+    
+    NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:22],NSFontAttributeName, nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    self.view.backgroundColor = KViewBGColor;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //布局
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //监听事件
 }
-*/
+- (void)dealloc
+{
+    
+}
+#pragma mark - Public Method
+//外部方法
+
+#pragma mark - Private Method
+//本类方法
+
+#pragma mark - Delegate
+//代理方法
+
+#pragma mark - Event Response
+//点击响应事件
+
+
+
+#pragma mark - getters and setters
+//初始化页面
 
 @end

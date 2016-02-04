@@ -10,6 +10,8 @@
 #import "HomeDefultCell.h"
 #import "YunisTopShowHUD.h"
 #import "HomeListModel+request.h"
+#import "LightHomeBasePage.h"
+#import "FirstHomeCell.h"
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     HomeListModel *source;
@@ -18,6 +20,7 @@
 @property (strong, nonatomic) NSMutableDictionary *offscreenCells;
 @end
 static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
+static NSString *YunisFirstCellIdentifier = @"YunisFirstCellIdentifier";
 @implementation HomeViewController
 
 #pragma mark - Life Cycle
@@ -27,10 +30,16 @@ static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
     //加载页面
     self.navigationController.navigationBarHidden = YES;
     self.offscreenCells = [NSMutableDictionary new];
-    [self.view addSubview:self.baseTableView];
+//    [self.view addSubview:self.baseTableView];
+//    
+//    
+//    [self.baseTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.view);
+//    }];
     
-    
-    [self.baseTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    LightHomeBasePage *base = [LightHomeBasePage showMaskHeardViewWithImage:[UIImage imageNamed:@"snow.jpg"] maskType:sliderAnimationType_UpTonArrow tableView:self.baseTableView];
+    [self.view addSubview:base];
+    [base mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
 
@@ -53,6 +62,8 @@ static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
 
         
     });
+    
+
     
     
 
@@ -109,13 +120,29 @@ static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
 {
     HomeDefultCell *cell;
     
-    cell = [self.offscreenCells objectForKey:YunisCellIdentifier];
-    if (!cell) {
+    if (indexPath.row == 0) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeDefultCell" owner:self options:nil] lastObject];
-        [self.offscreenCells setObject:cell forKey:YunisCellIdentifier];
+    }else{
+        cell = [self.offscreenCells objectForKey:YunisCellIdentifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeDefultCell" owner:self options:nil] lastObject];
+            [self.offscreenCells setObject:cell forKey:YunisCellIdentifier];
+        }
+
     }
 
+    if (indexPath.row == 0) {
+        cell.titleImageViewConstraints.constant = 1;
+        cell.LabtopConstraints.constant = 0;
+        cell.titleImageView.hidden = YES;
+    }else
+    {
+        cell.titleImageViewConstraints.constant = 200;
+        cell.LabtopConstraints.constant = 210;
+        cell.titleImageView.hidden = NO;
+    }
     [cell handelSource:source.list[indexPath.row]];
+
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
@@ -133,11 +160,27 @@ static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeDefultCell *cell;
-    
-    cell = [tableView dequeueReusableCellWithIdentifier:YunisCellIdentifier];
-    [cell handelSource:source.list[indexPath.row]];
+    if (indexPath.row == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:YunisFirstCellIdentifier];
+
+    }else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:YunisCellIdentifier];
+
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    if (indexPath.row == 0) {
+        cell.titleImageViewConstraints.constant = 0;
+        cell.LabtopConstraints.constant = 0;
+        cell.titleImageView.hidden = YES;
+    }else
+    {
+        cell.titleImageViewConstraints.constant = 200;
+        cell.LabtopConstraints.constant = 210;
+        cell.titleImageView.hidden = NO;
+    }
+    [cell handelSource:source.list[indexPath.row]];
+    [cell showTopIndex:indexPath.row + 1];
     cell.backgroundColor = KGrayColor;
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
@@ -167,13 +210,14 @@ static NSString *YunisCellIdentifier = @"YunisDefultCellCTY";
             UITableView *baseTableView    = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
             baseTableView.delegate        = self;
             baseTableView.dataSource      = self;
-            baseTableView.backgroundColor = [UIColor whiteColor];
+            baseTableView.backgroundColor = [UIColor clearColor];
             baseTableView.backgroundView  = nil;
             baseTableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
             baseTableView.rowHeight       = UITableViewAutomaticDimension;
 //            baseTableView.estimatedRowHeight = 120;
 //            baseTableView.rowHeight = UITableViewAutomaticDimension;
             [baseTableView registerNib:[UINib nibWithNibName:@"HomeDefultCell" bundle:nil] forCellReuseIdentifier:YunisCellIdentifier];
+            [baseTableView registerNib:[UINib nibWithNibName:@"HomeDefultCell" bundle:nil] forCellReuseIdentifier:YunisFirstCellIdentifier];
             baseTableView;
         });
     }
